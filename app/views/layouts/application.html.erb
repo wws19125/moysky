@@ -7,8 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <a class="brand" href="#">马赛克的天空</a>
+      <ul class="nav">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">广场</a></li>
+        <li><a href="#">投票</a></li>
+      </ul>
+    </div>
+  </div>
+    
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+          功能类表
+        <!--Sidebar content-->
+      </div>
+      <div class="span8">
+        <%= yield %>
+      </div>
+      <div class="span2">
+        放置消息，适当广告
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
