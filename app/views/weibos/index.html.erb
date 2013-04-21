@@ -1,0 +1,35 @@
+<h4>#说说身边的事情吧</h4>
+<%= render 'form' %>
+<table>
+  <thead>
+    <tr>
+      <th>Weiboid</th>
+      <th>Userid</th>
+      <th>Body</th>
+      <th>Pid</th>
+      <th>Btype</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @weibos.each do |weibo| %>
+    <tr>
+      <td><%= weibo.weiboid %></td>
+      <td><%= weibo.userid %></td>
+      <td><%= weibo.body %></td>
+      <td><%= weibo.pid %></td>
+      <td><%= weibo.btype %></td>
+      <td><%= link_to 'Show', weibo %></td>
+      <td><%= link_to 'Edit', edit_weibo_path(weibo) %></td>
+      <td><%= link_to 'Destroy', weibo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Weibo', new_weibo_path %>

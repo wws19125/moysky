@@ -11,7 +11,7 @@
     <div class="navbar-inner">
       <a class="brand" href="#">马赛克的天空</a>
       <ul class="nav">
-        <li><a href="#">首页</a></li>
+        <li class="active"><%= link_to '首页',root_path %></li>
         <li><a href="#">广场</a></li>
         <li><a href="#">投票</a></li>
       </ul>
@@ -24,10 +24,10 @@
           功能类表
         <!--Sidebar content-->
       </div>
-      <div class="span8">
+      <div class="span7">
         <%= yield %>
       </div>
-      <div class="span2">
+      <div class="span3">
         放置消息，适当广告
       </div>
     </div>
