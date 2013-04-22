@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  weiboid: 1
+  userid: 1
+  body: MyString
+  pid: 1
+  btype: 1
+
+two:
+  weiboid: 1
+  userid: 1
+  body: MyString
+  pid: 1
+  btype: 1

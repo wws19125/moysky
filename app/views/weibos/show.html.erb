@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Weiboid:</strong>
+  <%= @weibo.weiboid %>
+</p>
+
+<p>
+  <strong>Userid:</strong>
+  <%= @weibo.userid %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @weibo.body %>
+</p>
+
+<p>
+  <strong>Pid:</strong>
+  <%= @weibo.pid %>
+</p>
+
+<p>
+  <strong>Btype:</strong>
+  <%= @weibo.btype %>
+</p>
+
+
+<%= link_to 'Edit', edit_weibo_path(@weibo) %> |
+<%= link_to 'Back', weibos_path %>
