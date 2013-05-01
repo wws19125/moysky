@@ -1,9 +1,11 @@
 <h4>#说说身边的事情吧</h4>
-<%= javascript_include_tag "weibos" %>
 <%= stylesheet_link_tag "weibo_box",media:"all","data-turbolinks-track" =>true %>
+<%= javascript_include_tag "weibos" %>
 <%= render 'form' %>
 <hr/>
-<%= render @weibos %>
+<div id="msgbox">
+     <%= render @weibos %>
+</div>
 <table>
   <thead>
     <tr>

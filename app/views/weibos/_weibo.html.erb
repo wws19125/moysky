@@ -6,8 +6,8 @@
   <div class="msg_body">
     <div><%= weibo.body %></div>
     <div>
-      <div style="float:right">
-        <a><i class="icon-thumbs-up"></i></a>&nbsp;|&nbsp;<a><i class="icon-edit""></i></a>&nbsp;|&nbsp;<a><i class="icon-share"></i></a>&nbsp;|&nbsp;<a><i class="icon-trash"></i></a>
+      <div style="float:right" id="<%= weibo.id %>">
+        <a id="thumb"><i class="icon-thumbs-up"></i></a>&nbsp;|&nbsp;<a id="edit"><i class="icon-edit""></i></a>&nbsp;|&nbsp;<a id="share"><i class="icon-share"></i></a>&nbsp;|&nbsp;<a id="del"><i class="icon-trash"></i></a>
       </div>
       <%= "#{weibo.created_at}发布" %>
     </div>
