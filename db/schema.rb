@@ -17,8 +17,7 @@ ActiveRecord::Schema.define(version: 20130419025230) do
     t.integer  "userid",                  null: false
     t.string   "body",                    null: false
     t.integer  "pid",        default: -1
-    t.integer  "btype"
-    t.integer  "0"
+    t.integer  "btype",      default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

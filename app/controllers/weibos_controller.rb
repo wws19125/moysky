@@ -14,6 +14,9 @@ class WeibosController < ApplicationController
   # GET /weibos/1
   # GET /weibos/1.json
   def show
+    respond_to do |f|
+      f.html { redirect_to weibos_path }
+    end
   end
 
   # GET /weibos/new
@@ -23,6 +26,9 @@ class WeibosController < ApplicationController
 
   # GET /weibos/1/edit
   def edit
+    respond_to do |f|
+      f.html { redirect_to weibos_path }
+    end
   end
 
   # POST /weibos
@@ -64,7 +70,7 @@ class WeibosController < ApplicationController
   def destroy
     @weibo.destroy
     respond_to do |format|
-      format.html { redirect_to weibos_url }
+      format.html { render :text=>'ok' }
       format.json { head :no_content }
     end
   end
