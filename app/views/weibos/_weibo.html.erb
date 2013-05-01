@@ -1,10 +1,16 @@
-<div>
-  <div class="msg_body">
-    <div><%= weibo.body %></div>
-    <div><%= weibo.created_at %></div>
-  </div>
+<div class="hero-unit">
   <div class="msg_user">
     <%= weibo.userid %>
+    <%= image_tag 'rails.png' %>
+  </div>
+  <div class="msg_body">
+    <div><%= weibo.body %></div>
+    <div>
+      <div style="float:right">
+        <a><i class="icon-thumbs-up"></i></a>&nbsp;|&nbsp;<a><i class="icon-edit""></i></a>&nbsp;|&nbsp;<a><i class="icon-share"></i></a>&nbsp;|&nbsp;<a><i class="icon-trash"></i></a>
+      </div>
+      <%= "#{weibo.created_at}发布" %>
+    </div>
   </div>
 </div>
 <hr/>
