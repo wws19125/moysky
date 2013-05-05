@@ -1,0 +1,18 @@
+<div style="border:solid 1px;padding:6px 4px 3px 4px;">
+  <%= form_for(Comment.new) do |f| %>
+  <div class="field">
+    <%= f.text_area :body,:placeholder=>'评论',:rows=>1,:style=>"width:95%;margin-right:4px;" %>
+    <%= f.hidden_field :weibo_id,:value=>weibo.id %>
+  </div>
+  <div class="action">
+    <%= f.submit '评论',:class=>"btn btn-info" %>
+  </div>
+  <% end %>
+  <div>
+    <% weibo.comments.each do |item| %>
+    <div style="background:white;margin-top:10px;">
+    <%= item.body %><%= item.created_at %>
+    </div>
+    <% end %>
+  </div>
+</div>

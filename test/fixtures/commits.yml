@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  PID: 1
+  weiboid: 1
+  body: MyString
+
+two:
+  PID: 1
+  weiboid: 1
+  body: MyString

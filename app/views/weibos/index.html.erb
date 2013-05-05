@@ -2,14 +2,11 @@
 <%= stylesheet_link_tag "weibo_box",media:"all","data-turbolinks-track" =>true %>
 <%= javascript_include_tag "weibos" %>
 <%= render 'form' %>
-<hr/>
 <div  class="alert alert-block" id="weibo_notice">
   <span></span>
 </div>
+<hr/>
 <div id="msgbox">
      <%= render @weibos %>
 </div>
 <br />
-<div>
-  @Copyright2013 马赛克互联网公司 
-</div>
