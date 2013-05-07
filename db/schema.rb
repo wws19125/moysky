@@ -14,7 +14,8 @@
 ActiveRecord::Schema.define(version: 20130502115810) do
 
   create_table "comments", force: true do |t|
-    t.integer  "PID",        default: -1
+    t.integer  "comment_id", default: -1
+    t.integer  "commenter"
     t.integer  "weibo_id"
     t.string   "body"
     t.datetime "created_at"

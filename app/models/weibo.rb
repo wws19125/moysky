@@ -1,4 +1,4 @@
 class Weibo < ActiveRecord::Base
   default_scope order 'created_at desc'
-  has_many :comments
+  has_many :comments # ,:dependent=>:destroy
 end

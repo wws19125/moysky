@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class CommentsController < ApplicationController
 
   #GET
@@ -14,9 +15,17 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params);
+    # 查找父亲
+    if params[:comment_id] != nil
+      @comment.comment_id = params[:comment_id]
+      @pComment = Comment.find(params[:comment_id])
+      @comment.weibo_id = @pComment.weibo_id
+      puts @comment.weibo_id
+      puts @comment.comment_id
+    end
     respond_to do |format|
       if @comment.save
-        format.html { render :nothing=>true,:status => 200 }
+        format.html { render @comment }
       else
         format.html { render :nothing=>true,:status=>500 }
       end

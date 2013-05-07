@@ -8,11 +8,7 @@
     <%= f.submit '评论',:class=>"btn btn-info" %>
   </div>
   <% end %>
-  <div>
-    <% weibo.comments.each do |item| %>
-    <div style="background:white;margin-top:10px;">
-    <%= item.body %><%= item.created_at %>
-    </div>
-    <% end %>
+  <div id="comment_box">
+    <%= render weibo.comments %>
   </div>
 </div>

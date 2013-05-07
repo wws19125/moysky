@@ -68,6 +68,7 @@ class WeibosController < ApplicationController
   # DELETE /weibos/1
   # DELETE /weibos/1.json
   def destroy
+    Comment.destroy_all("weibo_id="+@weibo.id.to_s)
     @weibo.destroy
     respond_to do |format|
       format.html { render :text=>'ok' }

@@ -1,0 +1,15 @@
+<!-- 单条评论模板 -->
+<div>
+  <dl style="padding-top:18px;border-style:solid;border-width:1px 0 0;">
+    <dt style="float:left;display:inline;padding:3px 14px 0 0;">
+      <%= image_tag "rails.png",:size=>30*30 %>
+    </dt>
+    <dd style="word-wrap:break-word;margin:0 0 0 40px;vertical-align:text-bottom;">
+      <a><%= comment.body %>:@<%= comment.created_at %></a>
+      <div style="padding-top:18px;" id="<%= comment.id %>">
+        <a id="reComment" class="btn btn-link">回复</a>
+      </div>
+    </dd>
+    <br/>
+  </dl>
+</div>
