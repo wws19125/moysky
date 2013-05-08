@@ -55,12 +55,10 @@ class WeibosController < ApplicationController
   # PATCH/PUT /weibos/1.json
   def update
     respond_to do |format|
-      if @weibo.update(weibo_params)
-        format.html { redirect_to @weibo, notice: 'Weibo was successfully updated.' }
-        format.json { head :no_content }
+      if @weibo.update_attribute("thumbs_count",@weibo.thumbs_count+1)
+        format.html { render :text=>@weibo.thumbs_count }
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @weibo.errors, status: :unprocessable_entity }
+        format.html { render :status=>500,:nothing => true }
       end
     end
   end
@@ -75,7 +73,7 @@ class WeibosController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_weibo

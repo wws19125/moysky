@@ -16,3 +16,7 @@
 /tmp
 *.*~
 *~
+/doc/*
+*/*.~
+Gemfile
+Gemfile.*
