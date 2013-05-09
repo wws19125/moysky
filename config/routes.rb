@@ -1,4 +1,6 @@
 Moysky::Application.routes.draw do
+  resources :users
+
   get "comments/new"
   delete "comments/destroy"
   post "comments/create",:as => 'comments'

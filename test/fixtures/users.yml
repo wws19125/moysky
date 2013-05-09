@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  passport: MyString
+  dname: MyString
+  password: MyString
+  config: MyString
+
+two:
+  passport: MyString
+  dname: MyString
+  password: MyString
+  config: MyString
