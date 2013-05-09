@@ -8,7 +8,25 @@
       <div><%= weibo.body %></div>
       <div>
         <div style="float:right" id="<%= weibo.id %>">
-          <a id="thumb"><i class="icon-thumbs-up"></i></a>&nbsp;|&nbsp;<a id="comment"><i class="icon-edit""></i>(<%= weibo.comments.count %>)</a>&nbsp;|&nbsp;<a id="share"><i class="icon-share"></i></a>&nbsp;|&nbsp;<a id="del"><i class="icon-trash"></i></a>
+          <!-- 赞 -->
+          <a id="thumb" class="btn btn-link" style="padding:0;">
+            <i class="icon-thumbs-up"></i>
+            <span>(<%= weibo.thumbs_count %>)</span>
+          </a>|
+          <!-- 评论 -->
+          <a id="comment" class="btn btn-link" style="padding:0;">
+            <i class="icon-edit""></i>
+            <span>(<%= weibo.comments_count %>)</span>
+          </a>|
+          <!-- 转发 -->
+          <a id="share"  class="btn btn-link" style="padding:0;">
+            <i class="icon-share"></i>
+            <span>(<%= weibo.share_count %>)</span>
+          </a>|
+          <!-- 删除 -->
+          <a id="del" class="btn btn-link" style="padding:0;">
+            <i class="icon-trash"></i>
+          </a>
         </div>
         <%= "#{weibo.created_at}发布" %>
       </div>

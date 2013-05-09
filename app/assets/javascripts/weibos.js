@@ -9,7 +9,7 @@ $(function(){
 			del(id,item);
 			break;
 		    case "share":
-			alert("ff");
+			share();
 			break;
 		    case "comment":
 			if($(this).parent().next("div").length<1)
@@ -18,7 +18,7 @@ $(function(){
 			    $(this).parent().next("div").remove();
 			break;
 		    case "thumb":
-			thumb(id);
+			thumb($(this),id);
 			break;
 		    case "reComment":
 			reComment($(this));
@@ -49,7 +49,24 @@ $(function(){
 		    });
 		return false;
 	    });
-
+	function thumb(thumb,id)
+	{
+	    $.ajax({
+		    url:'/weibos/'+id,
+		    type:'put',
+		    success:function(data){
+			thumb.find("span").html("("+data+")");
+		    },
+		    error:function(){
+			show_notice("额，好吧，有点不想让你赞啊，等会再赞吧");
+		    }
+		});
+	}
+	//转发
+	function share()
+	{
+	    alert("share");
+	}
 	//评论,依旧采用AJAX
 	function comment(id,item)
 	{
