@@ -1,5 +1,12 @@
 Moysky::Application.routes.draw do
-  resources :users
+  namespace :userspace do
+    resources :users ,:except =>[:show] do
+      collection do
+        post 'logon'
+        post 'logout'
+      end
+    end
+  end
 
   get "comments/new"
   delete "comments/destroy"

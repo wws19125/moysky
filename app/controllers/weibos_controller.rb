@@ -8,7 +8,11 @@ class WeibosController < ApplicationController
     #the param in _form.erb.html
     @weibo = Weibo.new
     #all of the msg in db
-    @weibos = Weibo.all
+    if session[:user]
+      @weibos = Weibo.where("user_id="+session[:user].id.to_s)
+    else
+      @weibos = Weibo.all
+    end
   end
 
   # GET /weibos/1
@@ -37,7 +41,6 @@ class WeibosController < ApplicationController
     #receive the :body from client only
     @weibo = Weibo.new(weibo_params)
     #modify the other info
-    @weibo.userid = 0
     @weibo.created_at = Time.now
 
     respond_to do |format|

@@ -1,17 +1,44 @@
-class UsersController < ApplicationController
+class Userspace::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  include MsgHelper
   # GET /users
   # GET /users.json
   def index
     @users = User.all
   end
 
+  # post /users/logon
+  def logon
+    @msg = JMsg.new(0)
+    respond_to do |format|
+      if @user=User.find_by_dname_and_password(params[:dname],params[:password])
+        session[:user] = @user
+        @msg.msg = "ok"
+        # @msg.html="<
+        format.json { render 'shared/_msg',:locals => {:msg => @msg } }
+      else
+        @msg.code = 1
+        @msg.msg = "error"
+        format.json { render 'shared/_msg',:locals => {:msg => @msg } }
+      end
+    end
+  end
+
+  # post /users/logout
+  def logout
+    session[:user]=nil
+    reset_session
+    # goto the logout page
+    respond_to do |format|      
+      format.html { redirect_to root_path }
+    end
+  end
+  
   # GET /users/1
   # GET /users/1.json
   def show
   end
-
+ 
   # GET /users/new
   def new
     @user = User.new

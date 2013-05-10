@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130509055142) do
+ActiveRecord::Schema.define(version: 20130509060722) do
 
   create_table "comments", force: true do |t|
     t.integer  "comment_id", default: -1
     t.integer  "commenter"
     t.integer  "weibo_id"
     t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_configs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "usernames"
+    t.string   "configs"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -32,7 +40,7 @@ ActiveRecord::Schema.define(version: 20130509055142) do
   end
 
   create_table "weibos", force: true do |t|
-    t.integer  "userid",                    null: false
+    t.integer  "user_id",      default: 1,  null: false
     t.string   "body",                      null: false
     t.integer  "weibo_id",     default: -1
     t.integer  "btype",        default: 0

@@ -4,6 +4,7 @@
   <title>Moysky</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "global","data-trubolinks-track"=>true %>
   <%= csrf_meta_tags %>
   <style type="text/css">
   #logon:hover{
@@ -22,10 +23,21 @@
         <li><a href="#">广场</a></li>
         <li><a href="#">投票</a></li>
       </ul>
-    <a class="brand" style="float:right;font-size:14px;" id="logon" href="#">登录</a>
+      <% if !session[:user] %>
+      <a class="brand" style="float:right;font-size:14px;" id="logon">登录</a>
+      <% else %>
+      <%= link_to '注销','/userspace/users/logout',:method => :post,:class => "brand",:style => "float:right;font-size:14px;" %>
+      <% end %>
+      
     </div>
   </div>
-    
+  <!-- 登录 -->
+  <div style="position:fixed;top:60px;right:0;padding:20px 10px 20px 10px;border:1px solid;display:block;" id="logF">
+    <input type="text" name="dname" id="dname"/><br/>
+    <input type="password" name="password" id="password"/><br/>
+    <input type="button" class="btn btn-info" value="登录" id="logonBtn"/>
+  </div>
+    <!-- 正题 -->
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span2">
