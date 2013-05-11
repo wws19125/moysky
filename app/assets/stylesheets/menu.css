@@ -1,0 +1,46 @@
+.nav>li:hover
+{
+    background:rgb(209, 208, 207);
+}
+.menu_user_opr
+{
+    font-size:14px;
+    display:none;
+    background:rgb(209, 208, 207);
+    position:fixed;
+    top:40px;
+    right:10px;    
+    padding-top:10px;
+}
+.menu_user_opr a
+{
+    display:block;
+    width:100px;
+    padding:5px 0px;
+    padding-left:20px;
+    text-decoration:none;
+    color:#777777;
+}
+.menu_user_opr a:hover
+{
+    background:gray;
+    color:#333333;
+    weight:bolid;
+}
+.nav>li>div
+{
+    padding:10px 15px;
+}
+.nav>li>div:hover div
+{
+    display:block;
+}
+#logF
+{
+    position:fixed;
+    top:60px;
+    right:0;
+    padding:20px 10px 20px 10px;
+    border:1px solid;
+    display:none;
+}

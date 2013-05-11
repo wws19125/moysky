@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Userspace::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   include MsgHelper
@@ -14,7 +15,6 @@ class Userspace::UsersController < ApplicationController
       if @user=User.find_by_dname_and_password(params[:dname],params[:password])
         session[:user] = @user
         @msg.msg = "ok"
-        # @msg.html="<
         format.json { render 'shared/_msg',:locals => {:msg => @msg } }
       else
         @msg.code = 1
@@ -34,6 +34,47 @@ class Userspace::UsersController < ApplicationController
     end
   end
   
+  # Get forget the password
+  # Post send the email
+  def forget_password
+    respond_to do |format|
+      if !params[:email]
+        format.html { render :layout => 'tmb_frame' }
+      else
+        Notifier.amend_password(params[:email]).deliver
+        @msg = JMsg.new 0
+        @msg.msg = "ok"
+        @msg.html = "<a>我们已经向"+params[:email]+"发送电子邮件,请注意查收</a>"
+        format.json { render 'shared/_msg',:locals => {:msg  => @msg } }
+      end
+    end
+  end
+
+  def password_sendmail    
+    @msg = JMsg.new 0
+    respond_to do |format|
+      if !params[:email] #&&!params["code"] 
+        @msg.msg = "ok"
+        @msg.html = "<a>我们已经向"+params[:email]+"发送电子邮件"
+        format.json { render 'shared/msg',:locals => { :msg => @msg } }      
+      else
+        @msg.msg = "error"
+        format.json { render 'shared/msg',:locals => { :msg => @msg } }      
+      end
+    end
+  end
+
+  # update password
+  def update_password
+    # find the current user
+    @user = User.find session[:user].id
+    respond_to do |format|
+      if @user.update_attribute :password, params[:password]
+        
+      end
+    end
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show

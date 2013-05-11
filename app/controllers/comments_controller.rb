@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class CommentsController < ApplicationController
 
-  #GET
+  # GET
   def new
     @weibo = Weibo.find(params[:id])
     respond_to do |format|
@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
     end
   end
   
-  #helper
+  # helper
   private
   
   def comment_params

@@ -1,13 +1,15 @@
+# -*- coding: utf-8 -*-
 class WeibosController < ApplicationController
   before_action :set_weibo, only: [:show, :edit, :update, :destroy]
 
-  #==the first web page of weibo
-  #*GET /weibos
-  #*GET /weibos.json
-  def index
-    #the param in _form.erb.html
+  #== the first web page of weibo
+  #* GET /weibos
+  #* GET /weibos.json
+  def index    
+    # Notifier.amend_password.deliver
+    # the param in _form.erb.html
     @weibo = Weibo.new
-    #all of the msg in db
+    # all of the msg in db
     if session[:user]
       @weibos = Weibo.where("user_id="+session[:user].id.to_s)
     else
@@ -38,11 +40,10 @@ class WeibosController < ApplicationController
   # POST /weibos
   # POST /weibos.json
   def create
-    #receive the :body from client only
+    # receive the :body from client only
     @weibo = Weibo.new(weibo_params)
-    #modify the other info
+    # modify the other info
     @weibo.created_at = Time.now
-
     respond_to do |format|
       if @weibo.save
         format.html { render @weibo }

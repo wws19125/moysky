@@ -15,28 +15,8 @@
   </style>
 </head>
 <body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <a class="brand" href="#">马赛克的天空</a>
-      <ul class="nav">
-        <li class="active"><%= link_to '首页',root_path %></li>
-        <li><a href="#">广场</a></li>
-        <li><a href="#">投票</a></li>
-      </ul>
-      <% if !session[:user] %>
-      <a class="brand" style="float:right;font-size:14px;" id="logon">登录</a>
-      <% else %>
-      <%= link_to '注销','/userspace/users/logout',:method => :post,:class => "brand",:style => "float:right;font-size:14px;" %>
-      <% end %>
-      
-    </div>
-  </div>
-  <!-- 登录 -->
-  <div style="position:fixed;top:60px;right:0;padding:20px 10px 20px 10px;border:1px solid;display:block;" id="logF">
-    <input type="text" name="dname" id="dname"/><br/>
-    <input type="password" name="password" id="password"/><br/>
-    <input type="button" class="btn btn-info" value="登录" id="logonBtn"/>
-  </div>
+  <!-- 导航条 -->
+  <%= render "shared/menu" %>
     <!-- 正题 -->
   <div class="container-fluid">
     <div class="row-fluid">
@@ -53,7 +33,7 @@
     </div>
   </div>
 
-
+<!-- 版权信息 -->
 <%= render 'shared/copyright' %>
 </body>
 

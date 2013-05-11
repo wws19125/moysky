@@ -1,7 +1,10 @@
 Moysky::Application.routes.draw do
   namespace :userspace do
     resources :users ,:except =>[:show] do
+
       collection do
+        get :forget_password
+        post :forget_password
         post 'logon'
         post 'logout'
       end

@@ -1,0 +1,28 @@
+body
+{
+    background:rgb(220, 234, 245);
+    background-image:url("/assets/reg_bg.jpg");
+    background-repeat:no-repeat;
+}
+.contain
+{
+    background:white;
+    width:80%;
+    height:90%;
+    margin:auto;
+}
+.top
+{
+    background:green;
+    widht:100%;
+    height:15%;
+}
+.main
+{
+    width:100%;
+    height:75%;
+}
+.bottom
+{
+    background:#777777;
+}
