@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130509060722) do
+ActiveRecord::Schema.define(version: 20130512000731) do
 
   create_table "comments", force: true do |t|
     t.integer  "comment_id", default: -1
     t.integer  "commenter"
     t.integer  "weibo_id"
     t.string   "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "find_passwords", force: true do |t|
+    t.string   "email",      limit: 50
+    t.string   "code",       limit: 40
+    t.datetime "last_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +43,7 @@ ActiveRecord::Schema.define(version: 20130509060722) do
     t.string   "dname",      limit: 20
     t.string   "password",   limit: 16
     t.string   "config"
+    t.string   "email",      limit: 40, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

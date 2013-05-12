@@ -2,6 +2,7 @@
 class Userspace::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   include MsgHelper
+  include RandomHelper
   # GET /users
   # GET /users.json
   def index
@@ -37,15 +38,50 @@ class Userspace::UsersController < ApplicationController
   # Get forget the password
   # Post send the email
   def forget_password
+    email = params[:email]
     respond_to do |format|
-      if !params[:email]
-        format.html { render :layout => 'tmb_frame' }
+      if !email
+        format.html { render :layout => 'tmb_frame',:locals => { :title => '使用邮箱找回密码' } }
       else
-        Notifier.amend_password(params[:email]).deliver
-        @msg = JMsg.new 0
-        @msg.msg = "ok"
-        @msg.html = "<a>我们已经向"+params[:email]+"发送电子邮件,请注意查收</a>"
-        format.json { render 'shared/_msg',:locals => {:msg  => @msg } }
+        if user = User.find_by_email(email)
+          code = MyRandom.long_random_number_and_char 32
+          if FindPassword.create(:email => email,:last_time => ( Time.now + 2.day ),:code => code ) && Notifier.amend_password(email,user.dname,find_password_userspace_users_url+"/"+code+"/"+email).deliver
+            msg = JMsg.new 0
+            msg.msg = "ok"
+            msg.html = "我们已经向"+email+"发送电子邮件,请注意查收"
+            format.json { render 'shared/_msg',:locals => {:msg  => msg } }
+          else
+            msg = JMsg.new 1
+            msg.msg = "服务端出问题了，不知道怎么搞的"
+            format.json { render 'shared/_msg',:locals => {:msg => msg } }
+          end
+        else
+          msg = JMsg.new 1
+          msg.msg = "额，这个邮箱还没有被注册"
+          # @msg.
+          format.json { render 'shared/_msg',:locals => {:msg=>msg }}
+        end
+      end
+    end
+  end
+
+  # GET find the password
+  def find_password_page
+    if fp = FindPassword.find_by_email_and_code(params[:email],params[:key])
+      render :layout => 'tmb_frame',:locals => { :title => '重置密码',:id=>fp.id }
+    else
+      redirect_to root_url
+    end
+  end
+
+  # POST update the password
+  def find_password
+    user = User.find_by_email params[:email]
+    respond_to do |format|
+      if user.update_attribute(:password,params[:password])
+        format.html { render :text => "ok" }
+      else
+        format.html { render :text => "error" }
       end
     end
   end
@@ -55,7 +91,7 @@ class Userspace::UsersController < ApplicationController
     respond_to do |format|
       if !params[:email] #&&!params["code"] 
         @msg.msg = "ok"
-        @msg.html = "<a>我们已经向"+params[:email]+"发送电子邮件"
+        @msg.html = "<a>我们已经向"+params[:email]+"发送电子邮件</a>"
         format.json { render 'shared/msg',:locals => { :msg => @msg } }      
       else
         @msg.msg = "error"

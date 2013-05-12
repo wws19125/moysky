@@ -7,10 +7,11 @@ class Notifier < ActionMailer::Base
   #
   #   en.notifier.amend_password.subject
   #
-  def amend_password email
-    @greeting = "Hi"
-
-    mail to: "wws19125@126.com",:subject => "马赛克！修改你的密码"
+  def amend_password email="wws19125@126.com",username="null",url="http://www.baidu.com"
+    @email=email
+    @username = username
+    @url = url
+    mail to: @email,:subject => "马赛克！修改你的密码"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml

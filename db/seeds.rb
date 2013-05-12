@@ -5,5 +5,5 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create([{passport:'admin',dname:'admin',password:'123456',config:'0'}])
+User.create([{passport:'admin',dname:'admin',password:'123456',config:'0',email:'wws19125@126.com'}])
 Weibo.create(user_id:100,body:'sdfasdfasdfas')

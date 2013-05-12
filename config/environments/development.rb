@@ -34,4 +34,7 @@ Moysky::Application.configure do
 
   # Debug mode disables concatenation and preprocessing of assets.
   config.assets.debug = true
+  # Time zone
+  config.active_record.default_timezone=:local
+  config.time_zone='Beijing'
 end
