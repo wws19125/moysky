@@ -1,4 +1,18 @@
 Moysky::Application.routes.draw do
+  namespace :userspace do
+    resources :users ,:except =>[:show] do
+
+      collection do
+        get :forget_password
+        post :forget_password
+        get "find_password/:key/:email",:action => :find_password_page,:email =>  /[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)/          # the web page for find_password
+        post :find_password            # handle the request
+        post 'logon'
+        post 'logout'
+      end
+    end
+  end
+
   get "comments/new"
   delete "comments/destroy"
   post "comments/create",:as => 'comments'

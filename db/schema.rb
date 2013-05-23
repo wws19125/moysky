@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130502115810) do
+ActiveRecord::Schema.define(version: 20130512000731) do
 
   create_table "comments", force: true do |t|
     t.integer  "comment_id", default: -1
@@ -22,8 +22,39 @@ ActiveRecord::Schema.define(version: 20130502115810) do
     t.datetime "updated_at"
   end
 
+  create_table "find_passwords", force: true do |t|
+    t.string   "email",      limit: 50
+    t.string   "code",       limit: 40
+    t.datetime "last_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_configs", force: true do |t|
+    t.integer  "user_id"
+    t.string   "usernames"
+    t.string   "friends"
+    t.string   "configs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "passport"
+    t.string   "dname",      limit: 20
+    t.string   "password",   limit: 16
+    t.string   "config"
+    t.string   "email",      limit: 40, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "weibos", force: true do |t|
+<<<<<<< HEAD
     t.integer  "userid",                    null: false
+=======
+    t.integer  "user_id",      default: 1,  null: false
+>>>>>>> wang/user
     t.string   "body",                      null: false
     t.integer  "weibo_id",     default: -1
     t.integer  "btype",        default: 0

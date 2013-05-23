@@ -1,0 +1,31 @@
+$(function(){
+	$("#rpassword").blur(function(){
+		if($("#rpassword").val()!=$("#password").val())
+		    $("#info").text("不行，两次密码不一致 ");
+	    });
+	$("input[type='button']").click(function(){
+		if($("#password").val()==""||$("#rpassword").val()=="")
+		    {
+			$("#info").text("额，请检查您的输入～");
+			return;
+		    }
+		    else
+			if($("#rpassword").val()!=$("#password").val())
+			    {
+				$("#info").text("不行，两次密码不一致 ");
+				return;
+			    }
+		$("#info").text("");
+		$.ajax({
+			url:'/userspace/users/find_password',
+			    type:'POST',
+			    data:{"email":$("#email").val(),"password":$("#password").val()},
+			    success:function(data){
+			    alert(data);
+			},
+			    error:function(){
+			    $("#info").text("好吧，这次是我们的错了，等下再修改吧");
+			}
+		    });
+	    });
+});

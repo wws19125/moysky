@@ -1,30 +1,31 @@
 <div id="msg">
   <div class="hero-unit">
     <div class="msg_user">
-      <%= weibo.userid %>
+      <%= weibo.user_id %>
       <%= image_tag 'rails.png' %>
+      <span><i class="icon-plus"></i></span>
     </div>
     <div class="msg_body">
       <div><%= weibo.body %></div>
       <div>
         <div style="float:right" id="<%= weibo.id %>">
           <!-- 赞 -->
-          <a id="thumb" class="btn btn-link" style="padding:0;">
+          <a id="thumb">
             <i class="icon-thumbs-up"></i>
             <span>(<%= weibo.thumbs_count %>)</span>
           </a>|
           <!-- 评论 -->
-          <a id="comment" class="btn btn-link" style="padding:0;">
+          <a id="comment">
             <i class="icon-edit""></i>
             <span>(<%= weibo.comments_count %>)</span>
           </a>|
           <!-- 转发 -->
-          <a id="share"  class="btn btn-link" style="padding:0;">
+          <a id="share">
             <i class="icon-share"></i>
             <span>(<%= weibo.share_count %>)</span>
           </a>|
           <!-- 删除 -->
-          <a id="del" class="btn btn-link" style="padding:0;">
+          <a id="del">
             <i class="icon-trash"></i>
           </a>
         </div>

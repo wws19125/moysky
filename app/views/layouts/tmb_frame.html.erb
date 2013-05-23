@@ -1,0 +1,27 @@
+<!-- 上中下布局模板 -->
+<html>
+<head>
+  <title>
+    moysky
+  </title>  
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "tmb_frame", media: "all", "data-turbolink-track" => true %>  
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <div class="contain">
+    <div class="top">
+      <h3><%= link_to '马赛克的天空',root_path,:style=>"color:white;" %></h3>
+    </div>
+    <div class="main">      
+      <h3><%= title %></h3>
+      <hr/>
+      <%= yield %>
+    </div>
+    <div class="bottom">
+      <%= render 'shared/copyright' %>
+    </div>
+  </div>
+</body>
+</html>

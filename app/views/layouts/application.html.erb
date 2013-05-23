@@ -4,20 +4,20 @@
   <title>Moysky</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "global","data-trubolinks-track"=>true %>
   <%= csrf_meta_tags %>
+  <style type="text/css">
+  #logon:hover{
+    color:red;
+    font-weight:bold;
+    background:none;
+  }
+  </style>
 </head>
 <body>
-  <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-      <a class="brand" href="#">马赛克的天空</a>
-      <ul class="nav">
-        <li class="active"><%= link_to '首页',root_path %></li>
-        <li><a href="#">广场</a></li>
-        <li><a href="#">投票</a></li>
-      </ul>
-    </div>
-  </div>
-    
+  <!-- 导航条 -->
+  <%= render "shared/menu" %>
+    <!-- 正题 -->
   <div class="container-fluid">
     <div class="row-fluid">
       <div class="span2">
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-
+<!-- 版权信息 -->
 <%= render 'shared/copyright' %>
 </body>
 
