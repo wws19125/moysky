@@ -44,6 +44,7 @@ class WeibosController < ApplicationController
     @weibo = Weibo.new(weibo_params)
     # modify the other info
     @weibo.created_at = Time.now
+    
     respond_to do |format|
       if @weibo.save
         format.html { render @weibo }

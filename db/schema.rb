@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20130512000731) do
   create_table "user_configs", force: true do |t|
     t.integer  "user_id"
     t.string   "usernames"
+    t.string   "friends"
     t.string   "configs"
     t.datetime "created_at"
     t.datetime "updated_at"

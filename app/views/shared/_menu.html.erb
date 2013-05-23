@@ -9,10 +9,15 @@
     </ul>
     <ul class="nav" style="float:right;">
         <% if session[:user] %>
-        <li><a style="font-size:14px"><%= session[:user].dname %>,欢迎您</a></li>
+        <li><a style="font-size:14px"><%= session[:user].dname %>(0)</a></li>
+        <!-- 切换用户 -->
+        <li>
+          <!-- 显示其他用户的消息 -->
+          <a><i class="icon-user"></i>(0)</a>
+        </li>
         <li>
           <div>
-            <a><i class="icon-cog"></i></a>
+            <span><i class="icon-cog"></i></span>
             <div class="menu_user_opr">
               <a>帐号设置</a>
               <a>修改密码</a>

@@ -1,3 +1,85 @@
 <h1>New user</h1>
 
 <%= render 'form' %>
+
+<style>
+.left
+{
+  float: left;
+  margin-top: 12px;
+  width: 696px;
+}
+.post_data
+{
+  background: black;
+  color: #EDEDED;
+  float: left;
+  height: 72px;
+  margin-right: -5px;
+  position: absolute;
+  width: 55px;
+  
+}
+.article
+{
+  border:outset 3px;
+  border-right:inset 4px;
+  overflow: hidden;
+  width: 637px;
+  float:right;
+}
+.article_t
+{
+  scroll 0 0 transparent;
+  padding-top: 10px;
+}
+.thumbmail_box
+{
+  border: 1px solid #CCCCCC;
+  float: left;
+  height: 100px;
+  margin: 17px 10px 8px;
+  padding: 4px;
+  width: 140px;
+}
+.article_b {
+    padding: 5px 20px;
+}
+.username
+{
+  color:#333333;
+  font-weight:bold;
+  margin: 0;
+  font-size: 20px;
+  text-align:left;
+  width:100%;
+  display:block;
+}
+.entry_post {
+    height: 130px;
+    line-height: 22px;
+}
+.article_f {
+    background:black;
+    height: 40px;
+    overflow: hidden;
+}
+</style>
+
+
+<hr/>
+<div class="left">
+  <div class="post_data">
+    date
+  </div>
+  <div class="article">
+    <div class="article_t">
+      <div class="article_b">
+        <span class="username">username</span>
+        <div class="thumbmail_box"><%= image_tag 'me.jpg',:alt=>'shit',:size =>'120x150',:style=>'margin:3px;' %></div>
+        <p class="entry_post">刚开始安装时一直报错： gem install memcache Building native extensions. This could take a while… ERROR: Error installing memcache: ERROR: Failed to build gem native extension. /Users/imustardsoft/.rvm/rubies/ruby-1.9.3-head/bin/ruby extconf.rb Building libmemcached. tar xzf libmemcached-0.38.tar.gz 2>&1 env CFLAGS=’-fPIC’ .</p>
+      </div>
+      <div class="article_f"></div>
+    </div>
+  </div>
+</div>

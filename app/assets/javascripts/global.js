@@ -14,6 +14,7 @@ $(function(){
 	//  });
 	//$("body").click(function(e){ $("#logF").hide(); } );
 	//登录
+	$(".icon-user").parent().tooltip({title:'切换用户',placement:'bottom'});
 	$("#logonBtn").click(function(){
 		$.ajax({
 			url:'/userspace/users/logon',
