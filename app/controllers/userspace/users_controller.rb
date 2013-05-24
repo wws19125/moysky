@@ -8,7 +8,18 @@ class Userspace::UsersController < ApplicationController
   def index
     @users = User.all
   end
+  
+  # POST follow 关注
+  def follow
+    
+  end
 
+  
+  # DELETE unfollow 取消关注
+  def unfollow
+    
+  end
+  
   # post /users/logon
   def logon
     @msg = JMsg.new(0)

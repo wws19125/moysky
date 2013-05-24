@@ -1,5 +1,4 @@
-$(function(){
-	
+$(function(){	
 	$("#msgbox").delegate("span","click",function(){
 		var item = $(this).parents(".left");
 		var id = $(this).parent("div:last").attr("id");
@@ -25,6 +24,9 @@ $(function(){
 			break;
 		    case "rBtn":
 			reCommentAJAX($(this));
+			break;
+		    case "follow":
+			alert("关注");
 			break;
 		    default:
 			break;

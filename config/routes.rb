@@ -9,8 +9,12 @@ Moysky::Application.routes.draw do
         post :find_password            # handle the request
         post 'logon'
         post 'logout'
+        post 'follow'                   #follow
+        delete 'unfollow'           #unfollow
       end
+
     end
+
   end
 
   get "comments/new"
