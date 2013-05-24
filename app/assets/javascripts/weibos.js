@@ -1,7 +1,7 @@
 $(function(){
 	
-	$("#msgbox").delegate("a","click",function(){
-		var item = $(this).parents("#msg");
+	$("#msgbox").delegate("span","click",function(){
+		var item = $(this).parents(".left");
 		var id = $(this).parent("div:last").attr("id");
 		switch($(this).attr("id"))
 		    {
@@ -13,7 +13,7 @@ $(function(){
 			break;
 		    case "comment":
 			if($(this).parent().next("div").length<1)
-			    comment(id,$(this).parent().parent());
+			    comment(id,$(this).parent().parent(),$(this));
 			else
 			    $(this).parent().next("div").remove();
 			break;
@@ -68,7 +68,7 @@ $(function(){
 	    alert("share");
 	}
 	//评论,依旧采用AJAX
-	function comment(id,item)
+	function comment(id,item,comment)
 	{
 	    $.ajax({
 		    url:'/comments/new',
@@ -90,7 +90,7 @@ $(function(){
 		    btn.next("div").remove();
 		    return;
 		}
-	    var body = "<div style='padding:4px;'><textarea rows='1' id='body' name='body' style='width:80%;'/><p style='text-align:right;padding-right:20%;'><a type='button' class='btn' id='rBtn'>评论</a></p></div>";
+	    var body = "<div style='padding:4px;'><textarea rows='1' id='body' name='body' style='width:80%;'/><p style='text-align:right;padding-right:20%;'><span type='button' class='btn' id='rBtn'>回复</span></p></div>";
 	    btn.after(body);
 	}
 	//回复操作
@@ -131,10 +131,11 @@ $(function(){
 	}
 	//提示
 	function init_ToolTip(){
-	    $("a[id^='del']").tooltip({title:'删除'});
-	    $("a[id^='share']").tooltip({title:'转发'});
-	    $("a[id^='commit']").tooltip({title:'评论'});
-	    $("a[id^='thumb']").tooltip({title:'赞一个'});
+	    $("span[id^='del']").tooltip({title:'删除'});
+	    $("span[id^='share']").tooltip({title:'转发'});
+	    $("span[id^='comment']").tooltip({title:'评论'});
+	    $("span[id^='thumb']").tooltip({title:'赞一个'});
+	    $("span[id^='fllow']").tooltip({title:'关注' });
 	}
 	//显示信息
 	function show_notice(notice)
@@ -142,7 +143,7 @@ $(function(){
 	    $("#weibo_notice span").html(notice);
 	    $("#weibo_notice").fadeIn(1500) //,function(){$(this).fadeOut(7000);});
 	}
-	//ajax submit
+	//ajax submit,发布微博 
 	document.forms[0].onsubmit = function(){
 	    if($("#weibo_body").val()=="")return false;
 	    $.ajax({

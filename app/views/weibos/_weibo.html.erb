@@ -1,37 +1,39 @@
-<div id="msg">
-  <div class="hero-unit">
-    <div class="msg_user">
-      <%= weibo.user_id %>
-      <%= image_tag 'rails.png' %>
-      <span><i class="icon-plus"></i></span>
-    </div>
-    <div class="msg_body">
-      <div><%= weibo.body %></div>
+<div class="left">
+  <div class="post_data">
+    <% curr_time = Time.now %>
+    <% if curr_time.year == weibo.created_at.year && curr_time.yday == weibo.created_at.yday %>
+    <span style="display:block;font-size:16px;color:red;margin-top:20px;">今天</span>
+    <span style="font-size:12px;color:yellow;"><%= curr_time.hour == weibo.created_at.hour ? "#{(curr_time.min - weibo.created_at.min)}分钟前" : "#{weibo.created_at.hour}点" %></span>
+    <% else %>
+    <span style="font-size:16px;color:red;display:block;margin-top:10px;"><%= weibo.created_at.month %><font color="white"> 月</font></span>
+    <span><%= weibo.created_at.day %></span> 日
+    <% end %>
+  </div>
+  <div class="article">
+    <div class="article_t">
+      <div class="article_b">
+        <span class="username">username</span>
+        <div class="thumbmail_box"><%= image_tag 'me.jpg',:alt=>'shit',:size =>'120x160',:style=>'margin:3px;' %></div>
+        <p class="entry_post">
+          <%= weibo.body %>
+        </p>
+      </div>
+      <div class="article_f" id="<%= weibo.id %>" >
+        <!-- 删除 -->
+        <span id="del"><i class="icon-trash icon-large"></i></span>
+        <!-- 赞 -->
+        <span id="thumb"><i class="icon-thumbs-up icon-large"></i><span style="">(<%= weibo.thumbs_count %>)</span></span>
+        <!-- 评论 -->
+        <span id="comment"><i class="icon-edit icon-large"></i><span>(<%= weibo.comments_count %>)</span></span>
+        <!-- 转发 -->
+        <span id="share"><i class="icon-share icon-large"></i>(<%= weibo.share_count %>)</span>
+        <!-- 关注 -->
+        <span id="fllow"><i class="icon-plus icon-large"></i></span>
+      </div>      
+      <!-- 评论部分 -->
       <div>
-        <div style="float:right" id="<%= weibo.id %>">
-          <!-- 赞 -->
-          <a id="thumb">
-            <i class="icon-thumbs-up"></i>
-            <span>(<%= weibo.thumbs_count %>)</span>
-          </a>|
-          <!-- 评论 -->
-          <a id="comment">
-            <i class="icon-edit""></i>
-            <span>(<%= weibo.comments_count %>)</span>
-          </a>|
-          <!-- 转发 -->
-          <a id="share">
-            <i class="icon-share"></i>
-            <span>(<%= weibo.share_count %>)</span>
-          </a>|
-          <!-- 删除 -->
-          <a id="del">
-            <i class="icon-trash"></i>
-          </a>
-        </div>
-        <%= "#{weibo.created_at}发布" %>
+        
       </div>
     </div>
   </div>
-  <hr/>
 </div>
