@@ -11,13 +11,39 @@ class Userspace::UsersController < ApplicationController
   
   # POST follow 关注
   def follow
-    
+    if session[:user]
+      u = UserConfig.find(session[:user].id)
+      if !(u.friends.split.include? params[:id].to_s)
+        u.friends += " "+params[:id].to_s
+        u.update_attribute(:friends,u.friends)
+        render :text => "ok"
+      else
+        render :text => "已经关注过了奥"
+      end
+    else
+      render :text => "你需要去登录啊"
+    end
   end
 
   
   # DELETE unfollow 取消关注
   def unfollow
-    
+    if session[:user]
+      u = UserConfig.find(session[:user].id)
+      f_a = u.frinds.split
+      if f_a.include?params[:id].to_s
+        f_a.delete params[:id].to_s
+        u.friends = ""
+        f_a.each { |item| u.friends += item }
+        u.update_attribute(:friends,u.friends)
+        render :text => "ok"
+      else
+        render :text => "好像还没有关注啊"
+      end
+    else
+      render :text => "你需要去登录"
+    end
+
   end
   
   # post /users/logon
@@ -25,6 +51,7 @@ class Userspace::UsersController < ApplicationController
     @msg = JMsg.new(0)
     respond_to do |format|
       if @user=User.find_by_dname_and_password(params[:dname],params[:password])
+        reset_session
         session[:user] = @user
         @msg.msg = "ok"
         format.json { render 'shared/_msg',:locals => {:msg => @msg } }

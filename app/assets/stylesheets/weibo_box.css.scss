@@ -1,26 +1,3 @@
-.msg_body
-{
-  width:75%;
-}
-.msg_user
-{
-  float:right;
-  width:20%;
-  text-align:right;
-  padding-right:0px;
-}
-
-.hero-unit {
-    background-color: #EEEEEE;
-    border-radius: 6px 6px 6px 6px;
-    color: inherit;
-    font-size: 14px;
-    font-weight: 200;
-    line-height: 30px;
-    margin-bottom: 3px;
-    padding: 3px 10px 3px 10px;
-}
-
 @import "./font-awesome/css/font-awesome.min.css";
 .span7
 {
@@ -28,6 +5,11 @@
 body
 {
   background:url("/assets/bkg.png");  
+}
+
+a:hover
+{
+  background:white;
 }
 .left
 {
@@ -87,6 +69,9 @@ body
     height: 130px;
     line-height: 22px;
     color:#333333;
+}
+.entry_post i{
+    color:#83B8D7;
 }
 .entry_post:hover
 {

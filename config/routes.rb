@@ -20,7 +20,11 @@ Moysky::Application.routes.draw do
   get "comments/new"
   delete "comments/destroy"
   post "comments/create",:as => 'comments'
-  resources :weibos,:except =>[:show,:edit]
+  resources :weibos,:except =>[:show,:edit] do
+    member do
+      get :userspace
+    end
+  end
 
   get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.

@@ -26,12 +26,16 @@ $(function(){
 			reCommentAJAX($(this));
 			break;
 		    case "follow":
-			alert("关注");
+			follow($(this));
+			break;
+		    case "unfollow":
+			unfollow($(this));
 			break;
 		    default:
 			break;
 		    }
 	    });
+      
 	//ajax 处理评论提交
 	$("#msgbox").delegate("form","submit",function(){
 		var body = $(this).find("textarea");
@@ -51,6 +55,41 @@ $(function(){
 		    });
 		return false;
 	    });
+
+
+	//加关注处理
+	function follow(item)
+	{
+	    $.ajax({
+		    url:'/userspace/users/follow',
+			type:'post',
+			data:{"id":item.attr("name")},
+			success:function(data){
+			item.attr("id","unfollow");
+			item.find("i").removeClass("icon-plus").addClass("icon-minus");
+		    },
+			error:function(){
+			alert("error");
+		    }
+		});
+	}
+	//取消关注
+	function unfollow(item)
+	{
+	    $.ajax({
+		    url:'/userspace/users/unfollow',
+			type:'delete',
+			data:{"id":item.attr("name")},
+			success:function(data){
+			item.attr("id","follow");
+			item.find("i").removeClass("icon-minus").addClass("icon-plus");
+		    },
+			error:function(){
+			alert("error");
+		    }
+		});
+	}
+	//赞 处理
 	function thumb(thumb,id)
 	{
 	    $.ajax({
@@ -137,7 +176,8 @@ $(function(){
 	    $("span[id^='share']").tooltip({title:'转发'});
 	    $("span[id^='comment']").tooltip({title:'评论'});
 	    $("span[id^='thumb']").tooltip({title:'赞一个'});
-	    $("span[id^='fllow']").tooltip({title:'关注' });
+	    $("span[id^='follow']").tooltip({title:'关注' });
+	    $("span[id^='unfollow']").tooltip({title:'取消关注' });
 	}
 	//显示信息
 	function show_notice(notice)
