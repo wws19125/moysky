@@ -1,22 +1,91 @@
-.msg_body
+@import "./font-awesome/css/font-awesome.min.css";
+.span7
 {
-  width:75%;
 }
-.msg_user
+body
 {
-  float:right;
-  width:20%;
-  text-align:right;
-  padding-right:0px;
+  background:url("/assets/bkg.png");  
 }
 
-.hero-unit {
-    background-color: #EEEEEE;
-    border-radius: 6px 6px 6px 6px;
-    color: inherit;
-    font-size: 14px;
-    font-weight: 200;
-    line-height: 30px;
-    margin-bottom: 3px;
-    padding: 3px 10px 3px 10px;
+a:hover
+{
+  background:white;
+}
+.left
+{
+  float: left;
+  margin-top: 12px;
+  width: 696px;
+}
+.post_data
+{
+  background: black;
+  color: #EDEDED;
+  float: left;
+  height: 72px;
+  margin-right: -5px;
+  position: absolute;
+  width: 55px;
+  text-align:center;
+  padding-top:5px;
+}
+.article
+{
+  background:rgb(246, 251, 253);
+  border:outset 3px;
+  border-right:inset 4px;
+  overflow: hidden;
+  width: 637px;
+  float:right;
+}
+.article_t
+{
+
+  padding-top: 10px;
+}
+.thumbmail_box
+{
+  border: 1px solid #CCCCCC;
+  float: left;
+  height: 100px;
+  margin: 17px 10px 8px;
+  padding: 4px;
+  width: 140px;
+}
+.article_b {
+    padding: 5px 20px;
+}
+.username
+{
+  color:#333333;
+  font-weight:bold;
+  margin: 0;
+  font-size: 20px;
+  text-align:left;
+  width:100%;
+  display:block;
+}
+.entry_post {
+    height: 130px;
+    line-height: 22px;
+    color:#333333;
+}
+.entry_post i{
+    color:#83B8D7;
+}
+.entry_post:hover
+{
+    color:#777777;
+}
+.article_f {
+    background:black;
+    height: 40px;
+    overflow: hidden;
+}
+.article_f>span
+{
+	float:right;
+	display:block;
+	color:white;
+	padding:15px;
 }

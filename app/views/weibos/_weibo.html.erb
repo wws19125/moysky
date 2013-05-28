@@ -1,37 +1,60 @@
-<div id="msg">
-  <div class="hero-unit">
-    <div class="msg_user">
-      <%= weibo.user_id %>
-      <%= image_tag 'rails.png' %>
-      <span><i class="icon-plus"></i></span>
-    </div>
-    <div class="msg_body">
-      <div><%= weibo.body %></div>
-      <div>
-        <div style="float:right" id="<%= weibo.id %>">
-          <!-- 赞 -->
-          <a id="thumb">
-            <i class="icon-thumbs-up"></i>
-            <span>(<%= weibo.thumbs_count %>)</span>
-          </a>|
-          <!-- 评论 -->
-          <a id="comment">
-            <i class="icon-edit""></i>
-            <span>(<%= weibo.comments_count %>)</span>
-          </a>|
-          <!-- 转发 -->
-          <a id="share">
-            <i class="icon-share"></i>
-            <span>(<%= weibo.share_count %>)</span>
-          </a>|
+<div class="left">
+  <div class="post_data">
+    <% curr_time = Time.now %>
+    <% if curr_time.year == weibo.created_at.year && curr_time.yday == weibo.created_at.yday %>
+    <span style="display:block;font-size:16px;color:red;margin-top:20px;">今天</span>
+    <span style="font-size:13px;color:yellow;">
+      <% t_time = (curr_time - weibo.created_at)/60 %>
+      <%= t_time >= 60 ? "#{(t_time/60).to_i}小时前" : "#{t_time.to_i+1}分钟前"  %>
+    </span>
+    <% else %>
+    <span style="font-size:16px;color:red;display:block;margin-top:10px;"><%= weibo.created_at.month %><font color="white"> 月</font></span>
+    <span><%= weibo.created_at.day %></span> 日<br/>
+    <span style="color:yellow;"><%= weibo.created_at.hour>12?"PM":"AM" %><span>
+    <% end %>
+  </div>
+  <div class="article">
+    <div class="article_t">
+      <div class="article_b">
+        <span class="username">
+          <%= link_to User.find(weibo.user_id).dname,userspace_weibo_path(User.find(weibo.user_id)),:style=>"text-decoration:none;color:#333333;" %>
+        </span>
+        <div class="thumbmail_box"><%= image_tag 'me.jpg',:alt=>'shit',:size =>'120x160',:style=>'margin:3px;' %></div>
+        <p class="entry_post">
+          <i class="icon-quote-left"></i>&nbsp;<%= weibo.body %>&nbsp;<i class="icon-quote-right"></i>
+        </p>
+      </div>
+      <div class="article_f" id="<%= weibo.id %>" >
+        <% if session[:user] %>
+            <% if !(session[:user].id == weibo.user_id) %>
+                <% if c_config=UserConfig.find_by_user_id(session[:user].id).friends %>
+                    <% if c_config.split.include?weibo.user_id.to_s %>
+                        <!-- 取消关注 -->
+                        <span id = "unfollow" name="<%= weibo.user_id %>"><i class="icon-minus  icon-large"></i></span>
+                    <% else %>
+                        <!-- 关注 -->
+                        <span id="follow" name="<%= weibo.user_id %>"><i class="icon-plus icon-large"></i></span>
+                    <% end %>
+                <% end %>
+          <% else %>
           <!-- 删除 -->
-          <a id="del">
-            <i class="icon-trash"></i>
-          </a>
-        </div>
-        <%= "#{weibo.created_at}发布" %>
+          <span id="del"><i class="icon-trash icon-large"></i></span>
+          <% end %>
+        <% else %>
+            <!-- 关注 -->
+            <span id="follow" name="<%= weibo.user_id %>"><i class="icon-plus icon-large"></i></span>
+        <% end %>
+        <!-- 评论 -->
+        <span id="comment"><i class="icon-edit icon-large"></i><span>(<%= weibo.comments_count %>)</span></span>
+        <!-- 转发 -->
+        <span id="share"><i class="icon-share icon-large"></i>(<%= weibo.share_count %>)</span>
+        <!-- 赞 -->
+        <span id="thumb"><i class="icon-thumbs-up icon-large"></i><span style="">(<%= weibo.thumbs_count %>)</span></span>
+      </div>      
+      <!-- 评论部分 -->
+      <div>
+        
       </div>
     </div>
   </div>
-  <hr/>
 </div>

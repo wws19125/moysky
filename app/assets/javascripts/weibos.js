@@ -1,7 +1,6 @@
-$(function(){
-	
-	$("#msgbox").delegate("a","click",function(){
-		var item = $(this).parents("#msg");
+$(function(){	
+	$("#msgbox").delegate("span","click",function(){
+		var item = $(this).parents(".left");
 		var id = $(this).parent("div:last").attr("id");
 		switch($(this).attr("id"))
 		    {
@@ -13,7 +12,7 @@ $(function(){
 			break;
 		    case "comment":
 			if($(this).parent().next("div").length<1)
-			    comment(id,$(this).parent().parent());
+			    comment(id,$(this).parent().parent(),$(this));
 			else
 			    $(this).parent().next("div").remove();
 			break;
@@ -26,10 +25,17 @@ $(function(){
 		    case "rBtn":
 			reCommentAJAX($(this));
 			break;
+		    case "follow":
+			follow($(this));
+			break;
+		    case "unfollow":
+			unfollow($(this));
+			break;
 		    default:
 			break;
 		    }
 	    });
+      
 	//ajax 处理评论提交
 	$("#msgbox").delegate("form","submit",function(){
 		var body = $(this).find("textarea");
@@ -49,6 +55,41 @@ $(function(){
 		    });
 		return false;
 	    });
+
+
+	//加关注处理
+	function follow(item)
+	{
+	    $.ajax({
+		    url:'/userspace/users/follow',
+			type:'post',
+			data:{"id":item.attr("name")},
+			success:function(data){
+			item.attr("id","unfollow");
+			item.find("i").removeClass("icon-plus").addClass("icon-minus");
+		    },
+			error:function(){
+			alert("error");
+		    }
+		});
+	}
+	//取消关注
+	function unfollow(item)
+	{
+	    $.ajax({
+		    url:'/userspace/users/unfollow',
+			type:'delete',
+			data:{"id":item.attr("name")},
+			success:function(data){
+			item.attr("id","follow");
+			item.find("i").removeClass("icon-minus").addClass("icon-plus");
+		    },
+			error:function(){
+			alert("error");
+		    }
+		});
+	}
+	//赞 处理
 	function thumb(thumb,id)
 	{
 	    $.ajax({
@@ -68,7 +109,7 @@ $(function(){
 	    alert("share");
 	}
 	//评论,依旧采用AJAX
-	function comment(id,item)
+	function comment(id,item,comment)
 	{
 	    $.ajax({
 		    url:'/comments/new',
@@ -90,7 +131,7 @@ $(function(){
 		    btn.next("div").remove();
 		    return;
 		}
-	    var body = "<div style='padding:4px;'><textarea rows='1' id='body' name='body' style='width:80%;'/><p style='text-align:right;padding-right:20%;'><a type='button' class='btn' id='rBtn'>评论</a></p></div>";
+	    var body = "<div style='padding:4px;'><textarea rows='1' id='body' name='body' style='width:80%;'/><p style='text-align:right;padding-right:20%;'><span type='button' class='btn' id='rBtn'>回复</span></p></div>";
 	    btn.after(body);
 	}
 	//回复操作
@@ -131,10 +172,12 @@ $(function(){
 	}
 	//提示
 	function init_ToolTip(){
-	    $("a[id^='del']").tooltip({title:'删除'});
-	    $("a[id^='share']").tooltip({title:'转发'});
-	    $("a[id^='commit']").tooltip({title:'评论'});
-	    $("a[id^='thumb']").tooltip({title:'赞一个'});
+	    $("span[id^='del']").tooltip({title:'删除'});
+	    $("span[id^='share']").tooltip({title:'转发'});
+	    $("span[id^='comment']").tooltip({title:'评论'});
+	    $("span[id^='thumb']").tooltip({title:'赞一个'});
+	    $("span[id^='follow']").tooltip({title:'关注' });
+	    $("span[id^='unfollow']").tooltip({title:'取消关注' });
 	}
 	//显示信息
 	function show_notice(notice)
@@ -142,7 +185,7 @@ $(function(){
 	    $("#weibo_notice span").html(notice);
 	    $("#weibo_notice").fadeIn(1500) //,function(){$(this).fadeOut(7000);});
 	}
-	//ajax submit
+	//ajax submit,发布微博 
 	document.forms[0].onsubmit = function(){
 	    if($("#weibo_body").val()=="")return false;
 	    $.ajax({

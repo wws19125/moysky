@@ -2,6 +2,14 @@
 class WeibosController < ApplicationController
   before_action :set_weibo, only: [:show, :edit, :update, :destroy]
 
+  #== 特定用户的微博页面
+  #* GET /weibos/:id/userspace
+  def userspace
+    @weibo = Weibo.new
+    @weibos = Weibo.where("user_id ="+params[:id].to_s)
+    render :index
+  end
+  
   #== the first web page of weibo
   #* GET /weibos
   #* GET /weibos.json
@@ -11,7 +19,12 @@ class WeibosController < ApplicationController
     @weibo = Weibo.new
     # all of the msg in db
     if session[:user]
-      @weibos = Weibo.where("user_id="+session[:user].id.to_s)
+      sql_condition = "user_id in ("+session[:user].id.to_s
+      friends =  UserConfig.find_by_user_id(session[:user].id).friends
+      if friends
+          friends.split.each { |item| sql_condition += ","+item }
+      end
+      @weibos = Weibo.where(sql_condition + ")")
     else
       @weibos = Weibo.all
     end
@@ -44,7 +57,9 @@ class WeibosController < ApplicationController
     @weibo = Weibo.new(weibo_params)
     # modify the other info
     @weibo.created_at = Time.now
-    
+    if session[:user]
+      @weibo.user_id = session[:user].id
+    end
     respond_to do |format|
       if @weibo.save
         format.html { render @weibo }

@@ -9,14 +9,22 @@ Moysky::Application.routes.draw do
         post :find_password            # handle the request
         post 'logon'
         post 'logout'
+        post 'follow'                   #follow
+        delete 'unfollow'           #unfollow
       end
+
     end
+
   end
 
   get "comments/new"
   delete "comments/destroy"
   post "comments/create",:as => 'comments'
-  resources :weibos,:except =>[:show,:edit]
+  resources :weibos,:except =>[:show,:edit] do
+    member do
+      get :userspace
+    end
+  end
 
   get "home/index"
   # The priority is based upon order of creation: first created -> highest priority.
