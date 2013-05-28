@@ -1,4 +1,6 @@
 Moysky::Application.routes.draw do
+  resources :theaders
+
   namespace :userspace do
     resources :users ,:except =>[:show] do
 

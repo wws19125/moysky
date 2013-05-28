@@ -1,0 +1,53 @@
+<%= form_for(@theader) do |f| %>
+  <% if @theader.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@theader.errors.count, "error") %> prohibited this theader from being saved:</h2>
+
+      <ul>
+      <% @theader.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :direction %><br />
+    <%= f.number_field :direction %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :_title %><br />
+    <%= f.text_field :_title %>
+  </div>
+  <div class="field">
+    <%= f.label :heads %><br />
+    <%= f.text_field :heads %>
+  </div>
+  <div class="field">
+    <%= f.label :items %><br />
+    <%= f.text_field :items %>
+  </div>
+  <div class="field">
+    <%= f.label :length %><br />
+    <%= f.number_field :length %>
+  </div>
+  <div class="field">
+    <%= f.label :intro %><br />
+    <%= f.text_field :intro %>
+  </div>
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.number_field :type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
