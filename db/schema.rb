@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130512000731) do
+ActiveRecord::Schema.define(version: 20130528023412) do
 
   create_table "comments", force: true do |t|
     t.integer  "comment_id", default: -1
@@ -26,6 +26,30 @@ ActiveRecord::Schema.define(version: 20130512000731) do
     t.string   "email",      limit: 50
     t.string   "code",       limit: 40
     t.datetime "last_time"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "theaders", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "direction",  default: 0
+    t.string   "title"
+    t.string   "_title"
+    t.string   "heads"
+    t.string   "items"
+    t.string   "intro"
+    t.integer  "ttype",      default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tvalues", force: true do |t|
+    t.integer  "t_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "_title"
+    t.string   "heads"
+    t.string   "items"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,11 +74,7 @@ ActiveRecord::Schema.define(version: 20130512000731) do
   end
 
   create_table "weibos", force: true do |t|
-<<<<<<< HEAD
-    t.integer  "userid",                    null: false
-=======
     t.integer  "user_id",      default: 1,  null: false
->>>>>>> wang/user
     t.string   "body",                      null: false
     t.integer  "weibo_id",     default: -1
     t.integer  "btype",        default: 0

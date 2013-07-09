@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
 class TheadersController < ApplicationController
   before_action :set_theader, only: [:show, :edit, :update, :destroy]
-
+  # reference the helper
+  include TheadersHelper
   # GET /theaders
   # GET /theaders.json
   def index
@@ -10,11 +12,20 @@ class TheadersController < ApplicationController
   # GET /theaders/1
   # GET /theaders/1.json
   def show
+    render :layout => 'middle_max' 
   end
 
   # GET /theaders/new
   def new
-    @theader = Theader.new
+    # 用户存在
+    if session[:user]
+      @theader = Theader.new
+      @theader.user_id = session[:user].id
+      respond_to {|format| format.html { render :layout =>'middle_max'}}
+    # 用户不存在则跳转到首页
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /theaders/1/edit
@@ -25,10 +36,18 @@ class TheadersController < ApplicationController
   # POST /theaders.json
   def create
     @theader = Theader.new(theader_params)
-
+    # @theader.length = MyExcel.items_length(@theader.items)
+    # split the space
+    @theader.items = @theader.items.strip
+    if MyExcel.items_length(@theader.items)==0
+      redirect_to new_office_path,notice:' 亲～，没有填写表格选项奥'
+      return
+      # else
+      # redirect_to office_url(@theader)
+    end
     respond_to do |format|
       if @theader.save
-        format.html { redirect_to @theader, notice: 'Theader was successfully created.' }
+        format.html { redirect_to office_url(@theader), notice: 'Theader was successfully created.' }
         format.json { render action: 'show', status: :created, location: @theader }
       else
         format.html { render action: 'new' }

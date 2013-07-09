@@ -1,4 +1,29 @@
 <p id="notice"><%= notice %></p>
+<!-- 这里显示的是完整的表格预览,同时包括数据在内 -->
+<script>
+  $(function(){
+  //获取列名
+  var colStr = "<%= @theader.items %>".split(" ");
+  $("#excel").jqGrid({
+    colNames:colStr,
+    colModel:[
+              {name:'A',index:'A'},
+              {name:'B',index:'B'},
+              {name:'C',index:'C'},
+              {name:'D',index:'D'},
+              {name:'E',index:'E'},
+              {name:'F',index:'F'}
+             ],
+    rowNum:10,
+    rowList:[30,50,100],
+    caption:"Excel 表格"
+  });
+
+});
+</script>
+<div class="content">
+  <table id="excel"></table>
+</div>
 
 <p>
   <strong>User:</strong>
@@ -31,20 +56,15 @@
 </p>
 
 <p>
-  <strong>Length:</strong>
-  <%= @theader.length %>
-</p>
-
-<p>
   <strong>Intro:</strong>
   <%= @theader.intro %>
 </p>
 
 <p>
   <strong>Type:</strong>
-  <%= @theader.type %>
+  <%= @theader.ttype %>
 </p>
 
 
-<%= link_to 'Edit', edit_theader_path(@theader) %> |
-<%= link_to 'Back', theaders_path %>
+<%= link_to 'Edit', edit_office_path(@theader) %> |
+<%= link_to 'Back', offices_path %>

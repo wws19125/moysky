@@ -9,7 +9,6 @@
       <th> title</th>
       <th>Heads</th>
       <th>Items</th>
-      <th>Length</th>
       <th>Intro</th>
       <th>Type</th>
       <th></th>
@@ -27,12 +26,11 @@
       <td><%= theader._title %></td>
       <td><%= theader.heads %></td>
       <td><%= theader.items %></td>
-      <td><%= theader.length %></td>
       <td><%= theader.intro %></td>
-      <td><%= theader.type %></td>
-      <td><%= link_to 'Show', theader %></td>
-      <td><%= link_to 'Edit', edit_theader_path(theader) %></td>
-      <td><%= link_to 'Destroy', theader, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= theader.ttype %></td>
+      <td><%= link_to 'Show', office_url(theader) %></td>
+      <td><%= link_to 'Edit', edit_office_path(theader) %></td>
+      <td><%= link_to 'Destroy', office_url(theader), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
     <% end %>
   </tbody>
@@ -40,4 +38,4 @@
 
 <br />
 
-<%= link_to 'New Theader', new_theader_path %>
+<%= link_to 'New Theader', new_office_path %>

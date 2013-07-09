@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 Moysky::Application.routes.draw do
-  resources :theaders
+  resources :offices,:controller => :theaders               # 更改路由名称
 
   namespace :userspace do
     resources :users ,:except =>[:show] do
@@ -12,7 +13,7 @@ Moysky::Application.routes.draw do
         post 'logon'
         post 'logout'
         post 'follow'                   #follow
-        delete 'unfollow'           #unfollow
+        delete 'unfollow'           # unfollow
       end
 
     end
@@ -22,6 +23,7 @@ Moysky::Application.routes.draw do
   get "comments/new"
   delete "comments/destroy"
   post "comments/create",:as => 'comments'
+
   resources :weibos,:except =>[:show,:edit] do
     member do
       get :userspace
