@@ -4,67 +4,34 @@
   $(function(){
   //获取列名
   var colStr = "<%= @theader.items %>".split(" ");
+  var i,tmpCol=new Array();
+  // var colMod = "%< @theader.TValues 
+  for(i=0;i<colStr.length;i++)
+  {
+    tmpCol.push({name:"items["+i+"]",index:"items["+i+"]",editable:true });
+  }
+  
   $("#excel").jqGrid({
+    url:"/offices/<%= @theader.id %>/offvals",
     colNames:colStr,
-    colModel:[
-              {name:'A',index:'A'},
-              {name:'B',index:'B'},
-              {name:'C',index:'C'},
-              {name:'D',index:'D'},
-              {name:'E',index:'E'},
-              {name:'F',index:'F'}
-             ],
-    rowNum:10,
-    rowList:[30,50,100],
-    caption:"Excel 表格"
-  });
+    colModel:tmpCol,
+    datatype: "json",
+    width:$(window).width()*0.9,
+    rowNum:35,
+    pager:'#nav',
+    rowList:[35,70,140],
+    caption:"<%= @theader.title %><%= @theader._title %>",
+    editurl:"/offices/<%= @theader.id %>/offvals/"
+  }).jqGrid('navGrid',"#nav",{edit:false,add:false,del:false}).jqGrid('inlineNav',"#nav");
 
 });
 </script>
 <div class="content">
   <table id="excel"></table>
+  <div id="nav"></div>
+  <br/>
+  <p>填表说明： <font size="3" color="red"><%= @theader.intro %></font></p>
+  <%= link_to '填写这个表',new_office_offval_path([@theader,@tvalue]) %> | 
+  <%= link_to '修改这张表', edit_office_path(@theader) %> | 
+  <%= link_to '返回', offices_path %>
 </div>
-
-<p>
-  <strong>User:</strong>
-  <%= @theader.user_id %>
-</p>
-
-<p>
-  <strong>Direction:</strong>
-  <%= @theader.direction %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @theader.title %>
-</p>
-
-<p>
-  <strong> title:</strong>
-  <%= @theader._title %>
-</p>
-
-<p>
-  <strong>Heads:</strong>
-  <%= @theader.heads %>
-</p>
-
-<p>
-  <strong>Items:</strong>
-  <%= @theader.items %>
-</p>
-
-<p>
-  <strong>Intro:</strong>
-  <%= @theader.intro %>
-</p>
-
-<p>
-  <strong>Type:</strong>
-  <%= @theader.ttype %>
-</p>
-
-
-<%= link_to 'Edit', edit_office_path(@theader) %> |
-<%= link_to 'Back', offices_path %>

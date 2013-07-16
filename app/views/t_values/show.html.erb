@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @t_value.title %>
+</p>
+
+<p>
+  <strong> title:</strong>
+  <%= @t_value._title %>
+</p>
+
+<p>
+  <strong>Heads:</strong>
+  <%= @t_value.heads %>
+</p>
+
+<p>
+  <strong>Items:</strong>
+  <%= @t_value.items %>
+</p>
+
+<p>
+  <strong>Theader:</strong>
+  <%= @t_value.theader %>
+</p>
+
+
+<%= link_to 'Edit', edit_t_value_path(@t_value) %> |
+<%= link_to 'Back', t_values_path %>

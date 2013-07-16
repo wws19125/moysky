@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 Moysky::Application.routes.draw do
-  resources :offices,:controller => :theaders               # 更改路由名称
+  # resources :t_values
 
+  resources :offices,:controller => :theaders do               # 更改路由名称
+    resources :offvals,:controller => :t_values,:except => [:show]
+  end
+  
   namespace :userspace do
     resources :users ,:except =>[:show] do
 

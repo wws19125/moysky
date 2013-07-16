@@ -1,0 +1,35 @@
+<h1>Listing t_values</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th> title</th>
+      <th>Heads</th>
+      <th>Items</th>
+      <th>Theader</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @t_values.each do |t_value| %>
+    <tr>
+      <td><%= t_value.title %></td>
+      <td><%= t_value._title %></td>
+      <td><%= t_value.heads %></td>
+      <td><%= t_value.items %></td>
+      <td><%= t_value.theader %></td>
+      <td><%= link_to 'Show', t_value %></td>
+      <td><%= link_to 'Edit', edit_t_value_path(t_value) %></td>
+      <td><%= link_to 'Destroy', t_value, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New T value', new_t_value_path %>

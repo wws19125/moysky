@@ -12,6 +12,7 @@ class TheadersController < ApplicationController
   # GET /theaders/1
   # GET /theaders/1.json
   def show
+    @tvalue = @theader.TValues.build
     render :layout => 'middle_max' 
   end
 

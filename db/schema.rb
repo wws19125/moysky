@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130528023412) do
+ActiveRecord::Schema.define(version: 20130710074843) do
 
   create_table "comments", force: true do |t|
     t.integer  "comment_id", default: -1
@@ -30,6 +30,16 @@ ActiveRecord::Schema.define(version: 20130528023412) do
     t.datetime "updated_at"
   end
 
+  create_table "t_values", force: true do |t|
+    t.string   "heads"
+    t.string   "items"
+    t.integer  "theader_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "t_values", ["theader_id"], name: "index_t_values_on_theader_id"
+
   create_table "theaders", force: true do |t|
     t.integer  "user_id"
     t.integer  "direction",  default: 0
@@ -39,17 +49,6 @@ ActiveRecord::Schema.define(version: 20130528023412) do
     t.string   "items"
     t.string   "intro"
     t.integer  "ttype",      default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tvalues", force: true do |t|
-    t.integer  "t_id"
-    t.integer  "user_id"
-    t.string   "title"
-    t.string   "_title"
-    t.string   "heads"
-    t.string   "items"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
