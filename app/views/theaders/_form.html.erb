@@ -6,7 +6,7 @@
   <div style="width:90%;padding-left:20px;margin:auto;">
     <a>编辑表格<a id="notice"><%= notice %></a></a>
     <div style="background:gray;padding:40px;">
-      <%= form_for(@theader,:url => offices_path) do |f| %>
+      <%= form_for(@theader,:url =>@url) do |f| %>
   <% if @theader.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@theader.errors.count, "error") %> prohibited this theader from being saved:</h2>
@@ -55,7 +55,7 @@
         </tr>
       </table>
       <div class="actions">
-        <%= f.submit "创建表格",:class=>"btn btn-info" %>
+        <%= f.submit "提交",:class=>"btn btn-info" %>
       </div>
       <% end %>
     </div>

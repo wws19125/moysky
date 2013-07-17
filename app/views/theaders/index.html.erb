@@ -1,16 +1,13 @@
-<h1>Listing theaders</h1>
-
+<h1>当前所有的表格</h1>
 <table>
   <thead>
     <tr>
-      <th>User</th>
-      <th>Direction</th>
-      <th>Title</th>
-      <th> title</th>
-      <th>Heads</th>
-      <th>Items</th>
-      <th>Intro</th>
-      <th>Type</th>
+      <th>编号</th>
+      <th style="width:20px;">&nbsp;</th>
+      <th>标题</th>
+      <th style="width:20px;">&nbsp;</th>
+      <th>说明</th>
+      <th style="width:20px;">&nbsp;</th>
       <th></th>
       <th></th>
       <th></th>
@@ -18,19 +15,19 @@
   </thead>
 
   <tbody>
+    <% i=1 %>
     <% @theaders.each do |theader| %>
     <tr>
-      <td><%= theader.user_id %></td>
-      <td><%= theader.direction %></td>
-      <td><%= theader.title %></td>
-      <td><%= theader._title %></td>
-      <td><%= theader.heads %></td>
-      <td><%= theader.items %></td>
-      <td><%= theader.intro %></td>
-      <td><%= theader.ttype %></td>
-      <td><%= link_to 'Show', office_url(theader) %></td>
-      <td><%= link_to 'Edit', edit_office_path(theader) %></td>
-      <td><%= link_to 'Destroy', office_url(theader), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <td><%= i %></td>
+      <% i += 1 %>
+      <td>&nbsp;</td>
+      <td><font size="3"><%= theader.title %></font>——<%= theader._title %></td>
+      <td>&nbsp</td>
+      <td><%= theader.intro.length>10?theader.intro[0..9]+"...":theader.intro %></td>
+      <td>&nbsp;</td>
+      <td><%= link_to '详细', office_url(theader) %></td>
+      <td><%= link_to '修改', edit_office_path(theader) %></td>
+      <td><%= link_to '删除', office_url(theader), method: :delete, data: { confirm: '确定删除?' } %></td>
     </tr>
     <% end %>
   </tbody>
@@ -38,4 +35,4 @@
 
 <br />
 
-<%= link_to 'New Theader', new_office_path %>
+<%= link_to '创建表格', new_office_path %>

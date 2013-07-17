@@ -19,6 +19,7 @@ class TheadersController < ApplicationController
   # GET /theaders/new
   def new
     # 用户存在
+    @url = offices_path
     if session[:user]
       @theader = Theader.new
       @theader.user_id = session[:user].id
@@ -31,6 +32,7 @@ class TheadersController < ApplicationController
 
   # GET /theaders/1/edit
   def edit
+    @url = office_path(@theader)
   end
 
   # POST /theaders
@@ -48,7 +50,7 @@ class TheadersController < ApplicationController
     end
     respond_to do |format|
       if @theader.save
-        format.html { redirect_to office_url(@theader), notice: 'Theader was successfully created.' }
+        format.html { redirect_to office_url(@theader), notice: @theader.title+"创建完成" }
         format.json { render action: 'show', status: :created, location: @theader }
       else
         format.html { render action: 'new' }
@@ -62,7 +64,7 @@ class TheadersController < ApplicationController
   def update
     respond_to do |format|
       if @theader.update(theader_params)
-        format.html { redirect_to @theader, notice: 'Theader was successfully updated.' }
+        format.html { redirect_to office_path(@theader), notice: 'Theader was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -76,7 +78,7 @@ class TheadersController < ApplicationController
   def destroy
     @theader.destroy
     respond_to do |format|
-      format.html { redirect_to theaders_url }
+      format.html { redirect_to offices_url }
       format.json { head :no_content }
     end
   end
