@@ -12,22 +12,26 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :passport %><br />
+    <%= f.label "通行证" %><br />
     <%= f.text_field :passport %>
   </div>
   <div class="field">
-    <%= f.label :dname %><br />
+    <%= f.label "用户名" %><br />
     <%= f.text_field :dname %>
   </div>
   <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
+    <%= f.label "密码" %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label "电子邮件" %>
+    <%= f.email_field :email %>
   </div>
   <div class="field">
     <%= f.label :config %><br />
     <%= f.text_field :config %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit '提交' %>
   </div>
 <% end %>
